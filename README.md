@@ -28,7 +28,7 @@ podman build -t ghcr.io/sondalex/opencode-xdgopen:<tag> .
 Publish
 
 ```bash
-echo $GH_TOKEN| podman login podman build -t podman login ghcr.io -u <user> --password-stdin
+echo $GH_TOKEN| podman login  ghcr.io -u <user> --password-stdin
 ```
 
 ```bash

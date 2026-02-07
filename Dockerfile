@@ -1,4 +1,11 @@
 FROM ghcr.io/anomalyco/opencode:latest
 
-RUN apk add xdg-utils
+RUN apk add \
+  git \
+  bash \
+  curl \
+  wget \
+  ca-certificates \
+  openssh \
+  xdg-utils 
 
