@@ -7,5 +7,7 @@ RUN apk add \
   wget \
   ca-certificates \
   openssh \
-  xdg-utils 
+  xdg-utils \
+  perf \
+  ripgrep
 
