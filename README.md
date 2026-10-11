@@ -25,17 +25,18 @@ Build
 podman build -t ghcr.io/sondalex/opencode-xdgopen:<tag> .
 ```
 
-The base image and package manager are configurable with build args.
-Default is the musl (alpine) based image. For a glibc (Debian/Ubuntu) based image:
+The default target is `alpine` (musl), built on the upstream opencode image.
+The `debian` target is a real glibc image: it starts from `debian:bookworm-slim`
+and installs the official glibc opencode release binary
+(`opencode-linux-x64` / `opencode-linux-arm64`) from
+https://github.com/anomalyco/opencode/releases.
 
 ```bash
-podman build \
-  --build-arg BASE_IMAGE=<glibc-based-opencode-image> \
-  --build-arg PKG_MANAGER=apt \
-  -t ghcr.io/sondalex/opencode-xdgopen:<tag> .
+podman build --target debian -t ghcr.io/sondalex/opencode-xdgopen:debian .
 ```
 
-`PKG_MANAGER` supports `apk` (default) and `apt`.
+Build args: `BASE_IMAGE` (alpine target), `DEBIAN_IMAGE` and `OPENCODE_VERSION`
+(debian target, default `latest`).
 
 ### Tags
 
