@@ -6,16 +6,15 @@ ARG BASE_IMAGE=ghcr.io/anomalyco/opencode:latest
 ARG DEBIAN_IMAGE=debian:bookworm-slim
 
 FROM ${DEBIAN_IMAGE} AS debian
-ARG TARGETARCH
 ARG OPENCODE_VERSION=latest
 RUN set -eu; \
   apt-get update; \
   apt-get install -y --no-install-recommends git bash curl wget ca-certificates openssh-client xdg-utils linux-perf ripgrep tar; \
   rm -rf /var/lib/apt/lists/*; \
-  case "${TARGETARCH:-$(dpkg --print-architecture)}" in \
+  case "$(dpkg --print-architecture)" in \
     amd64|x64) asset=opencode-linux-x64 ;; \
     arm64) asset=opencode-linux-arm64 ;; \
-    *) echo "Unsupported architecture: ${TARGETARCH}" >&2; exit 1 ;; \
+    *) echo "Unsupported architecture: $(dpkg --print-architecture)" >&2; exit 1 ;; \
   esac; \
   if [ "$OPENCODE_VERSION" = latest ]; then \
     url="https://github.com/anomalyco/opencode/releases/latest/download/${asset}.tar.gz"; \
