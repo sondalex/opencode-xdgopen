@@ -35,8 +35,19 @@ podman build \
   -t ghcr.io/sondalex/opencode-xdgopen:<tag> .
 ```
 
-`PKG_MANAGER` supports `apk` (default) and `apt`. Use a tag naming scheme such as
-`<version>-alpine` / `<version>-debian` to distinguish variants.
+`PKG_MANAGER` supports `apk` (default) and `apt`.
+
+### Tags
+
+Following Docker Hub convention (`<version>-<variant>`), tags are:
+
+| Tag | Base | libc |
+| --- | --- | --- |
+| `latest`, `alpine`, `<version>`, `<version>-alpine` | alpine | musl |
+| `debian`, `<version>-debian` | debian | glibc |
+
+`latest` and the bare `<version>` point to the alpine variant.
+Users select a variant by tag, e.g. `ghcr.io/sondalex/opencode-xdgopen:debian`.
 
 Publish
 
