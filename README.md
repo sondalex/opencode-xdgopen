@@ -25,6 +25,30 @@ Build
 podman build -t ghcr.io/sondalex/opencode-xdgopen:<tag> .
 ```
 
+The base image and package manager are configurable with build args.
+Default is the musl (alpine) based image. For a glibc (Debian/Ubuntu) based image:
+
+```bash
+podman build \
+  --build-arg BASE_IMAGE=<glibc-based-opencode-image> \
+  --build-arg PKG_MANAGER=apt \
+  -t ghcr.io/sondalex/opencode-xdgopen:<tag> .
+```
+
+`PKG_MANAGER` supports `apk` (default) and `apt`.
+
+### Tags
+
+Following Docker Hub convention (`<version>-<variant>`), tags are:
+
+| Tag | Base | libc |
+| --- | --- | --- |
+| `latest`, `alpine`, `<version>`, `<version>-alpine` | alpine | musl |
+| `debian`, `<version>-debian` | debian | glibc |
+
+`latest` and the bare `<version>` point to the alpine variant.
+Users select a variant by tag, e.g. `ghcr.io/sondalex/opencode-xdgopen:debian`.
+
 Publish
 
 ```bash
